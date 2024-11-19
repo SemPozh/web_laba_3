@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+    <title>Точечный выстрел</title>
+    <h:outputStylesheet name="static/styles/style.css"/>
+</h:head>
+<h:body>
+    <div id="gridContainer">
+        <ui:include src="../include/_header.xhtml"/>
+        <div id="main-table">
+            <div class="gui-element" id="input-block">
+                <h:form id="form">
+                    <label id="x-label">Выберите X-координату</label>
+                    <div>
+                        <div>
+                            <div class="form_radio_btn">
+                                <!--@declare id="form:checkbox-1"-->
+
+                                <h:commandButton action="#{controllerBean.setX(-3)}" value="-3" class="r-choose_input checkbox_x checked_#{controllerBean.checkButtonX(-3)}"
+                                                                                     id="checkbox-1" ajax="true" update="@form"/>
+                                <label for="form:checkbox-1">-3</label>
+                            </div>
+
+                            <div class="form_radio_btn">
+                                <!--@declare id="form:checkbox-2"--><h:commandButton action="#{controllerBean.setX(-2)}" value="-2" class="r-choose_input checkbox_x checked_#{controllerBean.checkButtonX(-2)}" update="@form"
+                                                 id="checkbox-2" ajax="true"/>
+                                <label for="form:checkbox-2">-2</label>
+                            </div>
+
+                            <div class="form_radio_btn">
+                                <!--@declare id="form:checkbox-3"--><h:commandButton action="#{controllerBean.setX(-1)}" value="-1" class="r-choose_input checkbox_x checked_#{controllerBean.checkButtonX(-1)}" update="@form"
+                                                 id="checkbox-3" ajax="true" active="#{controllerBean.checkButtonX(-1)}"/>
+                                <label for="form:checkbox-3">-1</label>
+                            </div>
+
+                            <div class="form_radio_btn">
+                                <!--@declare id="form:checkbox-4"--><h:commandButton action="#{controllerBean.setX(0)}" value="0" class="r-choose_input checkbox_x checked_#{controllerBean.checkButtonX(0)}" update="@form"
+                                                 id="checkbox-4" ajax="true" active="#{controllerBean.checkButtonX(0)}"/>
+                                <label for="form:checkbox-4">0</label>
+                            </div>
+
+                            <div class="form_radio_btn">
+                                <!--@declare id="form:checkbox-5"--><h:commandButton action="#{controllerBean.setX(1)}" value="1" class="r-choose_input checkbox_x checked_#{controllerBean.checkButtonX(1)}" update="@form"
+                                                 id="checkbox-5" ajax="true" active="#{controllerBean.checkButtonX(1)}"/>
+                                <label for="form:checkbox-5">1</label>
+                            </div>
+
+                            <div class="form_radio_btn">
+                                <!--@declare id="form:checkbox-6"--><h:commandButton action="#{controllerBean.setX(2)}" value="2" class="r-choose_input checkbox_x checked_#{controllerBean.checkButtonX(2)}" update="@form"
+                                                 id="checkbox-6" ajax="true" active="#{controllerBean.checkButtonX(2)}"/>
+                                <label for="form:checkbox-6">2</label>
+                            </div>
+
+                            <div class="form_radio_btn">
+                                <!--@declare id="form:checkbox-7"--><h:commandButton action="#{controllerBean.setX(3)}" value="3" class="r-choose_input checkbox_x checked_#{controllerBean.checkButtonX(3)}" update="@form"
+                                                 id="checkbox-7" ajax="true" active="#{controllerBean.checkButtonX(3)}"/>
+                                <label for="form:checkbox-7">3</label>
+                            </div>
+
+                            <div class="form_radio_btn">
+                                <!--@declare id="form:checkbox-8"--><h:commandButton action="#{controllerBean.setX(4)}" value="4" class="r-choose_input checkbox_x checked_#{controllerBean.checkButtonX(4)}" update="@form"
+                                                 id="checkbox-8" ajax="true" active="#{controllerBean.checkButtonX(4)}"/>
+                                <label for="form:checkbox-8">4</label>
+                            </div>
+
+                            <div class="form_radio_btn">
+                                <!--@declare id="form:checkbox-9"--><h:commandButton action="#{controllerBean.setX(5)}" value="5" class="r-choose_input checkbox_x checked_#{controllerBean.checkButtonX(5)}" update="@form"
+                                                 id="checkbox-9" ajax="true" active="#{controllerBean.checkButtonX(5)}"/>
+                                <label for="form:checkbox-9">5</label>
+                            </div>
+                        </div>
+                    </div>
+                    <label id="y-label" for="y-inp">Выберите Y-координату</label>
+                    <div>
+                        <h:inputText p:placeholder="Введите Y в (-5...3)" class="y-choose_input" id="y-inp" name="y" value="#{controllerBean.graphShot.y}"/>
+                    </div>
+                    <label id="r-label">Выберите R</label>
+                    <div>
+                        <div class="form_radio_btn">
+                            <h:selectOneRadio value="#{controllerBean.graphShot.r}" class="r-choose_input checkbox_x" name="r">
+                                <f:selectItem itemValue="1" itemLabel="1"/>
+                                <f:selectItem itemValue="1.5" itemLabel="1.5"/>
+                                <f:selectItem itemValue="2" itemLabel="2"/>
+                                <f:selectItem itemValue="2.5" itemLabel="2.5"/>
+                                <f:selectItem itemValue="3" itemLabel="3"/>
+                            </h:selectOneRadio>
+                        </div>
+                    </div>
+                    <h:commandButton value="Отправить" class="submit_button" action="#{controllerBean.save}" id="submitButton" ajax="true"/>
+                    <p class="error_text" id="Incorrect">Некорректные значения в полях формы.</p>
+                    <p class="error_text" id="rNotSelectedError">r не выбран, невозвожно определить координаты</p>
+
+                    <h:inputHidden id="hiddenX" value="#{controllerBean.graphShot.x}" />
+                    <h:inputHidden id="hiddenY" value="#{controllerBean.graphShot.y}" />
+                    <h:inputHidden id="hiddenR" value="#{controllerBean.graphShot.r}" />
+
+                    <h:selectBooleanCheckbox id="hiddenByClick" value="#{controllerBean.graphShot.byClick}" style="display: none"/>
+                </h:form>
+            </div>
+
+            <div class="gui-element" id="visualization-block">
+                <div id="frame">
+                    <canvas id="figureCanvas" width="100" height="100"/>
+                </div>
+            </div>
+        </div>
+        <h:form id="clearButton">
+            <h:commandButton action="#{controllerBean.clearAllShots()}" value="Очистить таблицу" ajax="true"/>
+        </h:form>
+        <div id="data-table">
+            <div class="gui-element" id="data-block">
+                <div>
+                    <h:dataTable id="results" value="#{controllerBean.allShots}" var="shot">
+                        <h:column>
+                            <f:facet name="header">X</f:facet>
+                            #{shot.x}
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header">Y</f:facet>
+                            #{shot.y}
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header">R</f:facet>
+                            #{shot.r}
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header">Попадание</f:facet>
+                            #{shot.result}
+                        </h:column>
+                    </h:dataTable>
+                </div>
+            </div>
+        </div>
+        <ui:include src="../include/_footer.xhtml"/>
+    </div>
+</h:body>
+<h:outputScript name="/static/scripts/drawFigure.js"/>
+<h:outputScript name="/static/scripts/validation.js"/>
+<h:outputScript name="/static/scripts/index.js"/>
+<h:outputScript name="/static/scripts/navSetter.js"/>
+</html>

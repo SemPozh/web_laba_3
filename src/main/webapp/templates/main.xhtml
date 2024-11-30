@@ -82,7 +82,7 @@
                     <label id="r-label">Выберите R</label>
                     <div>
                         <div class="form_radio_btn">
-                            <h:selectOneRadio value="#{controllerBean.graphShot.r}" class="r-choose_input checkbox_x" name="r">
+                            <h:selectOneRadio value="#{controllerBean.graphShot.r}" class="r-choose_input checkbox_x" name="r" style="display: none">
                                 <f:selectItem itemValue="1" itemLabel="1"/>
                                 <f:selectItem itemValue="1.5" itemLabel="1.5"/>
                                 <f:selectItem itemValue="2" itemLabel="2"/>
@@ -112,6 +112,7 @@
         <h:form id="clearButton">
             <h:commandButton action="#{controllerBean.clearAllShots()}" value="Очистить таблицу" ajax="true"/>
         </h:form>
+
         <div id="data-table">
             <div class="gui-element" id="data-block">
                 <div>

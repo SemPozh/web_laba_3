@@ -1,25 +1,31 @@
 package com.itmo.web_laba_3.services;
+import jakarta.persistence.EntityManager;
 
-import com.itmo.web_laba_3.model.GraphShot;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class DatabaseManager {
-    private static SessionFactory sessionFactory;
+    private static EntityManagerFactory entityManagerFactory;
     public DatabaseManager(){}
-    public static SessionFactory getSessionFactory(){
-        if (sessionFactory==null){
-            Configuration configuration = new Configuration().configure();
-            configuration.addAnnotatedClass(GraphShot.class);
-            StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
-            sessionFactory = configuration.buildSessionFactory(builder.build());
+    public static EntityManagerFactory getEntityManagerFactory(){
+        if (entityManagerFactory==null){
+            // Настройка свойств для EclipseLink
+            Map<String, Object> properties = new HashMap<>();
+            properties.put("jakarta.persistence.jdbc.driver", "org.postgresql.Driver");
+            properties.put("jakarta.persistence.jdbc.url", "jdbc:postgresql://postgres:5432/lab3_user");
+            properties.put("jakarta.persistence.jdbc.user", "lab3_user");
+            properties.put("jakarta.persistence.jdbc.password", "lab3_user_password");
+            properties.put("eclipselink.logging.level", "FINE");
+            properties.put("eclipselink.ddl-generation", "create-tables");
+            entityManagerFactory = Persistence.createEntityManagerFactory("lab3Unit", properties);
         }
-        return sessionFactory;
-
+        return entityManagerFactory;
     }
 
-
+    public static EntityManager getEntityManager(){
+        return getEntityManagerFactory().createEntityManager();
+    }
 }

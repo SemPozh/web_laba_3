@@ -7,8 +7,6 @@ import com.itmo.web_laba_3.services.GraphShotDAO;
 import com.itmo.web_laba_3.validators.GraphValidator;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Named;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.io.Serializable;
 import java.util.List;
@@ -17,7 +15,6 @@ import java.util.List;
 @Named
 @ApplicationScoped
 public class ControllerBean implements Serializable {
-    private static final Logger logger = LogManager.getLogger(ControllerBean.class);
     private GraphShot graphShot;
     private final GraphShotDAO graphShotDAO = new GraphShotDAO();
     public ControllerBean(){

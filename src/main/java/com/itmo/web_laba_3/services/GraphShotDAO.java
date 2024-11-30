@@ -1,28 +1,46 @@
 package com.itmo.web_laba_3.services;
 
 import com.itmo.web_laba_3.model.GraphShot;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityTransaction;
 
 import java.util.List;
 
 public class GraphShotDAO {
     public void save(GraphShot graphShot) {
-        Session session = DatabaseManager.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
-        session.save(graphShot);
-        transaction.commit();
-        session.close();
+        EntityManager entityManager = DatabaseManager.getEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+        try {
+            transaction.begin();
+            entityManager.persist(graphShot);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+        } finally {
+            entityManager.close();
+        }
     }
     public List<GraphShot> getShots(){
-        return (List<GraphShot>) DatabaseManager.getSessionFactory().openSession().createQuery("from GraphShot").list();
+        try (EntityManager entityManager = DatabaseManager.getEntityManager()) {
+            return entityManager.createQuery("SELECT g FROM GraphShot g", GraphShot.class).getResultList();
+        }
     }
 
     public void clearAllShots(){
-        Session session = DatabaseManager.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
-        session.createQuery("delete from GraphShot").executeUpdate();
-        transaction.commit();
-        session.close();
+        EntityManager entityManager = DatabaseManager.getEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+        try {
+            transaction.begin();
+            entityManager.createQuery("DELETE FROM GraphShot").executeUpdate();
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+        } finally {
+            entityManager.close();
+        }
     }
 }

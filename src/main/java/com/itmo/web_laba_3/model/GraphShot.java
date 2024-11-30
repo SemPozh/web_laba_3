@@ -1,7 +1,6 @@
 package com.itmo.web_laba_3.model;
-import com.itmo.web_laba_3.exceptions.ValidationException;
-import com.itmo.web_laba_3.validators.GraphValidator;
 import jakarta.persistence.*;
+
 
 @Entity
 @Table(name = "shots")
@@ -63,4 +62,5 @@ public class GraphShot {
     public void setResult(boolean result) {
         this.result = result;
     }
+
 }

@@ -8,24 +8,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class DatabaseManager {
-    private static EntityManagerFactory entityManagerFactory;
+    private final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("lab3Unit");
     public DatabaseManager(){}
-    public static EntityManagerFactory getEntityManagerFactory(){
-        if (entityManagerFactory==null){
-            // Настройка свойств для EclipseLink
-            Map<String, Object> properties = new HashMap<>();
-            properties.put("jakarta.persistence.jdbc.driver", "org.postgresql.Driver");
-            properties.put("jakarta.persistence.jdbc.url", "jdbc:postgresql://postgres:5432/lab3_user");
-            properties.put("jakarta.persistence.jdbc.user", "lab3_user");
-            properties.put("jakarta.persistence.jdbc.password", "lab3_user_password");
-            properties.put("eclipselink.logging.level", "FINE");
-            properties.put("eclipselink.ddl-generation", "create-tables");
-            entityManagerFactory = Persistence.createEntityManagerFactory("lab3Unit", properties);
-        }
-        return entityManagerFactory;
-    }
 
-    public static EntityManager getEntityManager(){
-        return getEntityManagerFactory().createEntityManager();
+    public EntityManager getEntityManager(){
+        return entityManagerFactory.createEntityManager();
     }
 }

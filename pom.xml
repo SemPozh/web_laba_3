@@ -69,7 +69,7 @@
     <dependency>
       <groupId>org.eclipse.persistence</groupId>
       <artifactId>eclipselink</artifactId>
-      <version>4.0.4</version>
+      <version>5.0.0-B04</version>
     </dependency>
 
 

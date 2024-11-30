@@ -7,10 +7,10 @@
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
         <class>com.itmo.web_laba_3.model.GraphShot</class>
         <properties>
-            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://postgres:5432/lab3_user"/>
-            <property name="javax.persistence.jdbc.user" value="lab3_user"/>
-            <property name="javax.persistence.jdbc.password" value="lab3_user_password"/>
+            <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://postgres:5432/lab3_user"/>
+            <property name="jakarta.persistence.jdbc.user" value="lab3_user"/>
+            <property name="jakarta.persistence.jdbc.password" value="lab3_user_password"/>
             <property name="eclipselink.logging.level" value="FINE"/>
             <property name="eclipselink.logging.level.sql" value="FINE"/>
             <property name="eclipselink.ddl-generation" value="create-tables"/>

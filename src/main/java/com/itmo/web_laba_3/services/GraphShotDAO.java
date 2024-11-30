@@ -7,8 +7,13 @@ import jakarta.persistence.EntityTransaction;
 import java.util.List;
 
 public class GraphShotDAO {
+    private final DatabaseManager databaseManager;
+
+    public GraphShotDAO(){
+        this.databaseManager = new DatabaseManager();
+    }
     public void save(GraphShot graphShot) {
-        EntityManager entityManager = DatabaseManager.getEntityManager();
+        EntityManager entityManager = databaseManager.getEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         try {
             transaction.begin();
@@ -23,13 +28,13 @@ public class GraphShotDAO {
         }
     }
     public List<GraphShot> getShots(){
-        try (EntityManager entityManager = DatabaseManager.getEntityManager()) {
+        try (EntityManager entityManager = databaseManager.getEntityManager()) {
             return entityManager.createQuery("SELECT g FROM GraphShot g", GraphShot.class).getResultList();
         }
     }
 
     public void clearAllShots(){
-        EntityManager entityManager = DatabaseManager.getEntityManager();
+        EntityManager entityManager = databaseManager.getEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         try {
             transaction.begin();

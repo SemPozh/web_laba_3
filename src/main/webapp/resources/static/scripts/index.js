@@ -45,7 +45,7 @@ yInput.addEventListener("input", ()=>{
    validateYInput();
    if (checkY(yInput.value)){
        submitButton.disabled = false;
-       hiddenY.value = yInput.value;
+       hiddenY.value = yInput.value.slice(0, Math.min(6, yInput.value.length));
    } else {
        submitButton.disabled = true;
    }

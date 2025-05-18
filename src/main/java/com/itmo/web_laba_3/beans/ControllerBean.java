@@ -7,7 +7,6 @@ import com.itmo.web_laba_3.services.GraphShotDAO;
 import com.itmo.web_laba_3.validators.GraphValidator;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Named;
-
 import java.io.Serializable;
 import java.util.List;
 
